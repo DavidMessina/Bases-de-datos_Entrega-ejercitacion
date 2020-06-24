@@ -14,7 +14,14 @@
         Rating: <%=pelicula.rating%>
     </li>
     <li>
-        Genero: <a href="/peliculas/genero/<%=pelicula.genero.id%>"><%=pelicula.genero.name%></a>
+        Genero:
+        <% if (pelicula.genero){%>
+        <a href="/peliculas/genero/<%=pelicula.genero.id%>">
+            <%=pelicula.genero.name%>
+        </a>
+        <% } else { %>
+            El genero no fue definido
+        <% } %>
     </li>
     <li>
         Actores
