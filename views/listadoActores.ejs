@@ -1,0 +1,13 @@
+<%- include('./partials/header') %>
+<h1 class="title">Actores y Actrices</h1>
+<ul class="list">
+    <%for(let i = 0; i < actores.length; i++){%>
+        <li>
+            <a href="/actores/detail/<%=actores[i].id%>">
+            <%=actores[i].first_name%> <%=actores[i].last_name%>
+            </a>
+        </li>
+    <% } %>
+        
+    </ul>
+    <%- include('./partials/footer') %>

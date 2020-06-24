@@ -1,0 +1,30 @@
+<%- include('./partials/header') %>
+<h1 class="title"><%=actor.first_name%> <%=actor.last_name%></h1>
+<ul class="list">
+    
+    <li>
+        Raiting: <%=actor.rating%>
+    </li>
+    <li>
+        Película favorita: <a href="/peliculas/detail/<%=actor.favorita.id%>"><%=actor.favorita.title%></a>
+    </li>
+    <li>
+        Peliculas
+        <ul>
+            <% for (let i = 0; i < actor.peliculas.length; i++) { %>
+                <li>
+                    <a href="/peliculas/detail/<%=actor.peliculas[i].id%>"><%= actor.peliculas[i].title%></a> 
+                </li>
+                <% } %>
+            </ul>
+        </li>
+    </ul>
+    <a href="/actores/edit/<%=actor.id%>">
+        <button>Editar</button>
+    </a>
+    <form action="/actores/delete/<%=actor.id%>?_method=DELETE" method="POST">
+        <button type="submit">Borrar</button>
+    </form>
+    <%- include('./partials/footer') %>
+
+    

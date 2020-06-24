@@ -1,0 +1,61 @@
+<%- include('./partials/header') %>
+<h1 class="title">Editar actor</h1>
+
+<% function buscarError(name){
+    if(typeof errors != 'undefined'){
+        let error = errors.filter(function(error){
+            return error.param == name;
+        });
+        if(error.length == 0){
+            let error = [{
+                value: '',
+                msg: '',
+                param: '',
+                location: ''
+            }
+            ];
+            return error;
+        }
+        return error;
+    }else{
+        let error = [{
+            value: '',
+            msg: '',
+            param: '',
+            location: ''
+        }
+        ];
+        return error;
+    }
+}
+%>
+<form class="form" action="/actores/edit/<%=actor.id%>?_method=PUT" method="POST">
+    <div>
+        <label for="">Nombre del actor o actriz</label>
+        <input type="text" name="first_name" value="<%= (typeof datos != 'undefined') ? datos.first_name : actor.first_name  %>">
+        <span style="color: red;font-size: 12px;"><%= buscarError('first_name')[0].msg %></span>
+    </div>
+    <div>
+        <label for="">Apellido del actor o actriz</label>
+        <input type="text" name="last_name" value="<%= (typeof datos != 'undefined') ? datos.last_name : actor.last_name  %>">
+        <span style="color: red;font-size: 12px;"><%= buscarError('last_name')[0].msg %></span>
+    </div>
+    <div>
+        <label for="">Rating</label>
+        <input type="text" name="rating" value="<%= (typeof datos != 'undefined') ? datos.rating : actor.rating  %>">
+        <span style="color: red;font-size: 12px;"><%= buscarError('rating')[0].msg %></span>
+    </div>
+    <div>
+        <label for="">Película favorita</label>
+        <select name="favorite_movie_id" required>
+            <%for(let i = 0; i < peliculas.length; i++){%>
+                <option value="<%=peliculas[i].id%>">
+                    <%=peliculas[i].title%>
+                </option>
+                <% } %>
+            </select>
+    </div>
+    
+    <button style="margin: 0;" type="submit">Editar</button>
+</form>
+<%- include('./partials/footer') %>

@@ -1,0 +1,27 @@
+<%- include('./partials/header') %>
+<h1 class="title">Agregar actor a una película</h1>
+
+<form class="form" action="/peliculas/vincular" method="POST">
+    <div>
+        <label for="">Actor</label>
+        <select name="actor" required>
+            <%for(let i = 0; i < actores.length; i++){%>
+                <option value="<%=actores[i].id%>">
+                    <%=actores[i].first_name%> <%=actores[i].last_name%>
+                </option>
+                <% } %>
+            </select>
+        </div>
+        <label for="">Película</label>
+        <select name="pelicula" required>
+            <%for(let i = 0; i < peliculas.length; i++){%>
+                <option value="<%=peliculas[i].id%>">
+                    <%=peliculas[i].title%>
+                </option>
+                <% } %>
+            </select>
+        </div>
+        <br>
+        <button style="margin: 10px 0 0 0;" type="submit">Vincular</button>
+    </form>
+    <%- include('./partials/footer') %>

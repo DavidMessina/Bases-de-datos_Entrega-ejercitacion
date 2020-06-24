@@ -1,0 +1,14 @@
+<%- include('./partials/header') %>
+<h1 class="title">Películas del genero: <%=genero.name%></h1>
+
+<ul class="list">
+    <% for (let i = 0; i < peliculas.length; i++) { %>
+        <li>
+            <a href="/peliculas/detail/<%=peliculas[i].id%>">
+            <%= peliculas[i].title%>
+            </a> 
+        </li>
+    <% } %>
+</ul>
+    
+<%- include('./partials/footer') %>

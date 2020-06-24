@@ -1,0 +1,77 @@
+<%- include('./partials/header') %>
+<h1 class="title">Editar película</h1>
+
+<% function buscarError(name){
+    if(typeof errors != 'undefined'){
+        let error = errors.filter(function(error){
+            return error.param == name;
+        });
+        if(error.length == 0){
+            let error = [{
+                value: '',
+                msg: '',
+                param: '',
+                location: ''
+            }
+            ];
+            return error;
+        }
+        return error;
+    }else{
+        let error = [{
+            value: '',
+            msg: '',
+            param: '',
+            location: ''
+        }
+        ];
+        return error;
+    }
+}
+%>
+<form class="form" action="/peliculas/edit/<%=pelicula.id%>?_method=PUT" method="POST">
+    <div>
+        <label for="">Titulo de la película</label>
+        <input type="text" name="titulo" value="<%= (typeof datos != 'undefined') ? datos.titulo : pelicula.title%>">
+        <span style="color: red;font-size: 12px;"><%= buscarError('titulo')[0].msg %></span>
+    </div>
+    <div>
+        <label for="">Premios</label>
+        <input type="text" name="premios" value="<%= (typeof datos != 'undefined') ? datos.premios : pelicula.awards  %>">
+        <span style="color: red;font-size: 12px;"><%= buscarError('premios')[0].msg %></span>
+    </div>
+    <div>
+        <label for="">Duración</label>
+        <input type="text" name="duracion" value="<%= (typeof datos != 'undefined') ? datos.duracion : pelicula.length  %>">
+        <span style="color: red;font-size: 12px;"><%= buscarError('duracion')[0].msg %></span>
+    </div>
+    <div>
+        <label for="">Rating</label>
+        <input type="text" name="rating" value="<%= (typeof datos != 'undefined') ? datos.rating : pelicula.rating  %>">
+        <span style="color: red;font-size: 12px;"><%= buscarError('rating')[0].msg %></span>
+    </div>
+    <div>
+        <label for="">Fecha de estreno</label>
+        <input type="date" name="fecha_estreno" value="<%= (typeof datos != 'undefined') ? datos.fecha_estreno : pelicula.release_date  %>">
+        <span style="color: red;font-size: 12px;"><%= buscarError('fecha_estreno')[0].msg %></span>
+    </div>
+    <div>
+        <label for="">Genero</label>
+        <select name="genero">
+            <%for(let i = 0; i < generos.length; i++){%>
+                <% if(generos[i].id == pelicula.genre_id){%>
+                    <option value="<%=generos[i].id%>" selected>
+                        <%=generos[i].name%>
+                    </option>
+                <%} else {%>
+                    <option value="<%=generos[i].id%>">
+                        <%=generos[i].name%>
+                    </option>
+                <% } %> 
+                
+            <% } %>
+        </select>
+    </div>
+    <button style="margin: 0;" type="submit">Editar</button>
+</form>
+<%- include('./partials/footer') %>

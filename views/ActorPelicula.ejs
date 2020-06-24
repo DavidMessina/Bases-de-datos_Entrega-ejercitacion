@@ -1,0 +1,26 @@
+<%- include('./partials/header') %>
+<h1 class="title"><%=actor.first_name%> <%=actor.last_name%></h1>
+<h3 class="title">Valoración: <%=actor.rating%> puntos </h3>
+    <h4 class="title">Peliculas en las que actuó <%=actor.first_name%> <%=actor.last_name%></h4>
+        
+        <ul class="list">
+            <%for (let i = 0; i < peliculasActor.length; i++) { %>
+                <%let peliculaId = peliculasActor[i].movie_id%> 
+                
+                <%for (let i = 0; i < peliculas.length; i++) { %>
+                    
+                    <%if (peliculaId == peliculas[i].id){%> 
+                        <li>
+                            <a href="/peliculas/detail/<%=peliculas[i].id%>">
+                            <%= peliculas[i].title%>
+                            </a>
+                        </li>
+                    <% } %>
+                
+                <% } %>
+            
+            <% } %>
+        </ul>
+
+            
+<%- include('./partials/footer') %>
